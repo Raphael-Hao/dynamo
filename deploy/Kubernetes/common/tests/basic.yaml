@@ -17,7 +17,7 @@ component:
   name: test_dynamo_chart
 distributed:
   requestPlane:
-    etcdUrl: etcd:2379
+    etcdUrl: etcd:12379
     natsUrl: nats://nats:4222
 image:
   name: test_dynamo_image-name

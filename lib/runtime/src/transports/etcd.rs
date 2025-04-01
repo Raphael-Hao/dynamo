@@ -371,7 +371,7 @@ fn default_servers() -> Vec<String> {
             .split(',')
             .map(|s| s.to_string())
             .collect(),
-        Err(_) => vec!["http://localhost:2379".to_string()],
+        Err(_) => vec!["http://localhost:12379".to_string()],
     }
 }
 

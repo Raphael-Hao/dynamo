@@ -21,7 +21,7 @@ global:
 dynamo-operator:
   enabled: true
   natsAddr: "nats://${RELEASE_NAME}-nats:4222"
-  etcdAddr: "${RELEASE_NAME}-etcd:2379"
+  etcdAddr: "${RELEASE_NAME}-etcd:12379"
   namespaceRestriction:
     enabled: true
     targetNamespace: ${NAMESPACE}

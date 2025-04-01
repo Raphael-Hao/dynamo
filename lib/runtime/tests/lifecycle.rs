@@ -27,7 +27,7 @@ fn test_lifecycle() {
 
 // async fn discoverable(runtime: Runtime) -> Result<()> {
 //     let config = DiscoveryConfig {
-//         etcd_url: vec!["http://localhost:2379".to_string()],
+//         etcd_url: vec!["http://localhost:12379".to_string()],
 //         etcd_connect_options: None,
 //     };
 

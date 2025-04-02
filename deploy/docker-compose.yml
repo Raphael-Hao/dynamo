@@ -26,13 +26,9 @@ services:
     image: bitnami/etcd
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
-      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:12379
-      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:12379
-      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://0.0.0.0:12380
-      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:12380
     ports:
-      - 12379:12379
-      - 12380:12380
+      - 12379:2379
+      - 12380:2380
 
   prometheus:
     image: prom/prometheus:latest

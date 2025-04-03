@@ -63,7 +63,7 @@ sequenceDiagram
 3. Deploy using the provided scripts
 
 ### Prerequisites
-
+这个必须先跑
 Start required services (etcd and NATS) using [Docker Compose](../../deploy/docker-compose.yml)
 ```bash
 docker compose -f deploy/docker-compose.yml up -d
@@ -75,10 +75,18 @@ docker compose -f deploy/docker-compose.yml up -d
 ./container/build.sh
 ```
 
-### Run container
+### Update docker for benchmark
+如果只是更新了examples/llm/ 下面的内容，只需要更新镜像就行，默认的镜像tag是latest
 
 ```
-./container/run.sh -it
+./container/update.sh
+```
+
+
+### Run container
+下面这个命令默认在执行完毕后
+```
+./container/run.sh -it --rm FALSE --gpus '"device=4,5,6,7"' -v /data0/whcui/ckpt:/workspace/ckpt --image combathhhhhh/pdmux:dynamo-latest
 ```
 ## Run Deployment
 
@@ -135,19 +143,15 @@ dynamo serve graphs.disagg_router:Frontend -f ./configs/disagg_router.yaml
 In another terminal:
 ```bash
 # this test request has around 200 tokens isl
-
-curl localhost:8000/v1/chat/completions   -H "Content-Type: application/json"   -d '{
-    "model": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
-    "messages": [
-    {
-        "role": "user",
-        "content": "In the heart of Eldoria, an ancient land of boundless magic and mysterious creatures, lies the long-forgotten city of Aeloria. Once a beacon of knowledge and power, Aeloria was buried beneath the shifting sands of time, lost to the world for centuries. You are an intrepid explorer, known for your unparalleled curiosity and courage, who has stumbled upon an ancient map hinting at ests that Aeloria holds a secret so profound that it has the potential to reshape the very fabric of reality. Your journey will take you through treacherous deserts, enchanted forests, and across perilous mountain ranges. Your Task: Character Background: Develop a detailed background for your character. Describe their motivations for seeking out Aeloria, their skills and weaknesses, and any personal connections to the ancient city or its legends. Are they driven by a quest for knowledge, a search for lost familt clue is hidden."
-    }
-    ],
-    "stream":false,
-    "max_tokens": 30
-  }'
-
+curl http://localhost:8000/v1/completions \
+    -H "Content-Type: application/json" \
+    -d '{
+        "model": "LWM-Text-1M",
+        "prompt": "San Francisco is a",
+        "max_tokens": 7,
+        "stream":true,
+        "temperature": 0
+    }'
 ```
 
 ### Multinode Examples

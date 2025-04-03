@@ -15,18 +15,18 @@
 
 
 Frontend:
-  served_model_name: deepseek-ai/DeepSeek-R1-Distill-Llama-8B
-  endpoint: dynamo.Processor.chat/completions
+  served_model_name: LWM-Text-1M
+  endpoint: dynamo.Processor.completions
   port: 8000
 
 Processor:
-  model: deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+  model: /workspace/ckpt/LWM-Text-1M
   router: round-robin
 
 VllmWorker:
-  model: deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+  model: /workspace/ckpt/LWM-Text-1M
   kv-transfer-config: '{"kv_connector":"DynamoNixlConnector"}'
-  max-model-len: 16384
+  max-model-len: 8192
   remote-prefill: true
   conditional-disagg: true
   max-local-prefill-length: 10
@@ -34,14 +34,14 @@ VllmWorker:
   ServiceArgs:
     workers: 1
     resources:
-      gpu: 1
+      gpu: 2
 
 PrefillWorker:
-  model: deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+  model: /workspace/ckpt/LWM-Text-1M
   kv-transfer-config: '{"kv_connector":"DynamoNixlConnector"}'
-  max-model-len: 16384
-  max-num-batched-tokens: 16384
+  max-model-len: 8192
+  max-num-batched-tokens: 8192
   ServiceArgs:
     workers: 1
     resources:
-      gpu: 1
+      gpu: 2

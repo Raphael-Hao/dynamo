@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+ARG BASE_IMAGE="combathhhhhh/pdmux"
+ARG BASE_IMAGE_TAG="dynamo.initial"
+
+FROM ${BASE_IMAGE}:${BASE_IMAGE_TAG} AS runtime
+
+WORKDIR /workspace
+
+# Copy examples
+COPY ./examples examples/
+
+ENTRYPOINT [ "/usr/bin/bash" ]
+CMD []

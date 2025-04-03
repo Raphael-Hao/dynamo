@@ -197,12 +197,12 @@ class Processor(ProcessMixIn):
                     f"Request type {request_type} not implemented"
                 )
 
-    @dynamo_endpoint(name="chat/completions")
-    async def chat_completions(self, raw_request: ChatCompletionRequest):
-        async for response in self._generate(raw_request, RequestType.CHAT):
-            yield response
-
-    # @dynamo_endpoint()
-    # async def completions(self, raw_request: CompletionRequest):
-    #     async for response in self._generate(raw_request, RequestType.COMPLETION):
+    # @dynamo_endpoint(name="chat/completions")
+    # async def chat_completions(self, raw_request: ChatCompletionRequest):
+    #     async for response in self._generate(raw_request, RequestType.CHAT):
     #         yield response
+
+    @dynamo_endpoint(name="completions")
+    async def completions(self, raw_request: CompletionRequest):
+        async for response in self._generate(raw_request, RequestType.COMPLETION):
+            yield response

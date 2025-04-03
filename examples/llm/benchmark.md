@@ -63,7 +63,7 @@ sequenceDiagram
 3. Deploy using the provided scripts
 
 ### Prerequisites
-
+这个必须先跑
 Start required services (etcd and NATS) using [Docker Compose](../../deploy/docker-compose.yml)
 ```bash
 docker compose -f deploy/docker-compose.yml up -d
